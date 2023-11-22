@@ -1,7 +1,19 @@
 import styled from 'styled-components'
 
-export const HomeContainer = styled.main``
+export const HomeContainer = styled.main`
+  > img {
+    position: absolute;
+    background-size: cover;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 560px;
+    z-index: 1;
+  }
+`
 export const BannerHome = styled.section`
+  position: relative;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: space-between;

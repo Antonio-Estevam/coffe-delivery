@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const HeaderContainer = styled.div`
   margin: 2rem 0;
+  position: relative;
+  z-index: 999;
 `
 export const Nav = styled.nav`
   display: flex;

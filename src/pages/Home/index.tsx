@@ -6,12 +6,15 @@ import {
   List,
 } from './styles'
 import Imagem from '../../assets/Imagem.svg'
+import Background from '../../assets/Background.png'
 import { ShoppingCart, Package, Timer, Coffee } from '@phosphor-icons/react'
 import { CoffeCard } from './components/CoffeCard'
+import { coffes } from '../../utils/coffesArray'
 
 export function Home() {
   return (
     <HomeContainer>
+      <img src={Background} alt="" />
       <BannerHome>
         <div className="left">
           <div>
@@ -46,54 +49,18 @@ export function Home() {
       <CoffeeList>
         <h1>Nossos cafés</h1>
         <List>
-          <CoffeCard
-            typeCoffe={['Tradicional', 'gelado']}
-            title="Expresso Tradicional"
-            price={9.9}
-            description="O tradicional café feito com água quente e grãos moídos"
-          />
-          <CoffeCard
-            typeCoffe={['Tradicional']}
-            title="Expresso Tradicional"
-            price={9.9}
-            description="O tradicional café feito com água quente e grãos moídos"
-          />
-          <CoffeCard
-            typeCoffe={['Tradicional', 'gelado']}
-            title="Expresso Tradicional"
-            price={9.9}
-            description="O tradicional café feito com água quente e grãos moídos"
-          />
-          <CoffeCard
-            typeCoffe={['Tradicional', 'gelado']}
-            title="Expresso Tradicional"
-            price={9.9}
-            description="O tradicional café feito com água quente e grãos moídos"
-          />
-          <CoffeCard
-            typeCoffe={['Tradicional', 'gelado']}
-            title="Expresso Tradicional"
-            price={9.9}
-            description="O tradicional café feito com água quente e grãos moídos"
-          />
-          <CoffeCard
-            typeCoffe={['Tradicional', 'gelado']}
-            title="Expresso Tradicional"
-            price={9.9}
-            description="O tradicional café feito com água quente e grãos moídos"
-          />
-          <CoffeCard
-            typeCoffe={['Tradicional', 'gelado']}
-            title="Expresso Tradicional"
-            price={9.9}
-            description="O tradicional café feito com água quente e grãos moídos"
-          />
-          <CoffeCard
-            typeCoffe={['Tradicional', 'gelado']}
-            title="Expresso Tradicional"
-            price={9.9}
-            description="O tradicional café feito com água quente e grãos moídos"
-          />
+          {coffes.map((coffe) => {
+            return (
+              <CoffeCard
+                key={coffe.id}
+                thumbnailNameFile={coffe.thumbnailNameFile}
+                typeCoffe={coffe.typeCoffe}
+                title={coffe.title}
+                price={coffe.price}
+                description={coffe.description}
+              />
+            )
+          })}
         </List>
       </CoffeeList>
     </HomeContainer>
