@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+type CartLink = {
+  quantityproducts: number
+}
+
 export const HeaderContainer = styled.div`
   margin: 2rem 0;
   position: relative;
@@ -34,14 +38,16 @@ export const CurrentLocation = styled(ActionBase)`
     justify-self: center;
   }
 `
-export const CartLinkContainer = styled(ActionBase)`
+
+export const CartLinkContainer: React.FC<CartLink> = styled(ActionBase)`
   background: ${(props) => props.theme['yellow-light']};
   position: relative;
   &::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    content: '3';
+    content: '${(props) =>
+      props.quantityproducts > 9 ? `+9` : (props) => props.quantityproducts}';
     padding: 1px 1px;
     border-radius: 50%;
     width: 15px;

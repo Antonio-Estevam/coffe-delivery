@@ -53,11 +53,13 @@ export function Home() {
             return (
               <CoffeCard
                 key={coffe.id}
-                thumbnailNameFile={coffe.thumbnailNameFile}
+                id={coffe.id}
+                thumbnailUrl={coffe.thumbnailUrl}
                 typeCoffe={coffe.typeCoffe}
                 title={coffe.title}
                 price={coffe.price}
                 description={coffe.description}
+                availableQuantity={coffe.availableQuantity}
               />
             )
           })}

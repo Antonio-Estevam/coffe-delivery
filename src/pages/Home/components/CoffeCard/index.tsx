@@ -1,36 +1,57 @@
-import { CoffeCardContainer, Buy } from './styles'
+import { CoffeCardContainer, Buy, Thumbnail } from './styles'
 import { ShoppingCart } from '@phosphor-icons/react'
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
+import { CartContext } from '../../../../contexts/CartProvider'
 
 interface Coffe {
+  id: number
   typeCoffe: string[]
   title: string
   price: number
   description: string
-  thumbnailNameFile: string
+  thumbnailUrl: string
+  availableQuantity: number
 }
 export function CoffeCard(props: Coffe) {
-  const [ImgThumbnail, setImgThumbnail] = useState<string | undefined>(
-    undefined,
-  )
+  const [quantity, setQuantity] = useState(1)
 
-  useEffect(() => {
-    const importImage = async function () {
-      try {
-        const imagem = await import(
-          `../../../../assets/coffeImage/${props.thumbnailNameFile}`
-        )
-        setImgThumbnail(imagem.default)
-      } catch {
-        setImgThumbnail(undefined)
-      }
+  const { items, updateCart } = useContext(CartContext)
+
+  function addItem(item: any): void {
+    const filtredItem = items.find((itemFind) => itemFind.id === item.id)
+
+    if (filtredItem) {
+      const newFilterItem = items.filter((itemFind) => itemFind.id !== item.id)
+      updateCart([
+        ...newFilterItem,
+        {
+          ...item,
+          itemQuantity: filtredItem.itemQuantity + item.itemQuantity,
+        },
+      ])
+    } else {
+      updateCart([...items, item])
     }
-    importImage()
-  }, [])
+  }
+  function handleAvailableQuantity(
+    event: React.ChangeEvent<HTMLInputElement>,
+    availableQuantity: number,
+  ) {
+    event.preventDefault()
+    if (Number(event.target.value) > availableQuantity) {
+      alert(`Temos apenas ${availableQuantity} disponível para pedidos!`)
+    } else {
+      setQuantity(Number(event.target.value))
+    }
+  }
 
   return (
     <CoffeCardContainer>
-      <img src={ImgThumbnail} alt={props.title} title={props.title} />
+      <Thumbnail
+        src={props.thumbnailUrl}
+        alt={props.title}
+        title={props.title}
+      />
       <div className="coffeTypeGroup">
         {props.typeCoffe.map((type) => {
           return (
@@ -47,8 +68,27 @@ export function CoffeCard(props: Coffe) {
           R$
           <span>{props.price.toFixed(2)}</span>
         </div>
-        <input type="number" max={999} min={1} />
-        <button type="button">
+        <input
+          type="number"
+          max={999}
+          min={0}
+          value={quantity}
+          onChange={(e) => {
+            handleAvailableQuantity(e, props.availableQuantity)
+          }}
+        />
+        <button
+          type="button"
+          onClick={() =>
+            addItem({
+              id: props.id,
+              thumbnailUrl: props.thumbnailUrl,
+              title: props.title,
+              price: props.price,
+              itemQuantity: quantity,
+            })
+          }
+        >
           <ShoppingCart size={20} weight="fill" />
         </button>
       </Buy>

@@ -50,12 +50,23 @@ export const ItemsGroup = styled.div`
     font-size: 1rem;
     font-family: 'Roboto', sans-serif;
     color: ${(props) => props.theme['base-text']};
+    &:first-child svg {
+      background-color: ${(props) => props.theme['yellow-dark']};
+    }
+    &:nth-child(n + 2) svg {
+      background-color: ${(props) => props.theme['base-text']};
+    }
+    &:nth-child(n + 3) svg {
+      background-color: ${(props) => props.theme.yellow};
+    }
     &:nth-child(-n + 2) {
       margin-bottom: 20px;
     }
+    &:last-child svg {
+      background-color: ${(props) => props.theme.purple};
+    }
     svg {
       padding: 8px;
-      background-color: ${(props) => props.theme.yellow};
       color: ${(props) => props.theme.white};
       border-radius: 50%;
     }

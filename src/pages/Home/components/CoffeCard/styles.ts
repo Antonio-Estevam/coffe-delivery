@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+export const Thumbnail = styled.img`
+  width: 7.5rem;
+  margin-top: -1rem;
+`
+
 export const CoffeCardContainer = styled.div`
   background: ${(props) => props.theme['base-card']};
   width: 16rem;
@@ -12,10 +17,6 @@ export const CoffeCardContainer = styled.div`
   box-sizing: border-box;
   margin-bottom: 3rem;
 
-  img {
-    width: 7.5rem;
-    margin-top: -1rem;
-  }
   .coffeTypeGroup {
     display: flex;
     gap: 5px;
@@ -68,7 +69,7 @@ export const Buy = styled.div`
   input {
     font-size: 1rem;
     color: ${(props) => props.theme['base-title']};
-    max-width: 45px;
+    max-width: 2.8124rem;
     margin: 0 15px 0 10px;
     border: none;
     border-radius: 5px;
